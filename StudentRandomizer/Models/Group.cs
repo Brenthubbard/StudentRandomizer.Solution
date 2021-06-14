@@ -4,9 +4,13 @@ namespace StudentRandomizer.Models
 {
   public class Group
   {
-    public int GroupId { get; set; }
     // public string Name { get; set; }
-    public int GroupFreq { get; set; } // should this be in the join entity?
+
+    // public int GroupSize { get; set; }
+
+    public int GroupId { get; set; }
+    
+    public List<Student> Students { get; set; }
 
     public virtual ICollection<GroupStudent> GroupStudentJoinEntities { get; set; }
 

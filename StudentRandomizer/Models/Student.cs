@@ -9,12 +9,12 @@ namespace StudentRandomizer.Models
     public string Name { get; set; }
 
     public ICollection<GroupStudent> GroupStudentJoinEntities { get; set; }
-    public ICollection<PairStudent> PairStudentJoinEntities { get; set; }
+    public ICollection<MatchStudent> MatchStudentJoinEntities { get; set; }
 
     public Student()
     {
       this.GroupStudentJoinEntities = new HashSet<GroupStudent>();
-      this.PairStudentJoinEntities = new HashSet<PairStudent>();
+      this.MatchStudentJoinEntities = new HashSet<MatchStudent>();
     }
   }
 }
