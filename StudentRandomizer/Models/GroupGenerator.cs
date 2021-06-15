@@ -28,7 +28,7 @@ namespace StudentRandomizer.Models
       for (int i = startIndex; i < inputStudentList.Count; i++)
       {
         tempStudentStack.Push(inputStudentList[i]);
-        RecursiveCombinationGenerator(groupList, tempStudentStack, inputStudentList, startIndex + 1, groupSize - 1);
+        RecursiveCombinationGenerator(groupList, tempStudentStack, inputStudentList, i + 1, groupSize - 1);
         tempStudentStack.Pop();
       }
 
