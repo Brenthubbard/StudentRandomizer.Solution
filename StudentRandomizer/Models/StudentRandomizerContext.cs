@@ -8,7 +8,7 @@ namespace StudentRandomizer.Models
   public class StudentRandomizerContext : DbContext
   {
     public DbSet<Student> Students { get; set;}
-    public DbSet<StudentStudent> StudentStudent { get; set; }
+    public DbSet<StudentStudent> StudentStudents { get; set; }
 
     // public DbSet<Group> Groups { get; set;}
     // public DbSet<Match> Matches { get; set;}
