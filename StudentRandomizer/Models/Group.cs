@@ -9,14 +9,16 @@ namespace StudentRandomizer.Models
     // public int GroupSize { get; set; }
 
     public int GroupId { get; set; }
-    
-    public List<Student> Students { get; set; }
 
-    public virtual ICollection<GroupStudent> GroupStudentJoinEntities { get; set; }
+    // public List<Student> Students { get; set; }
+
+    // public virtual ICollection<GroupStudent> GroupStudentJoinEntities { get; set; }
 
     public Group()
     {
-      this.GroupStudentJoinEntities = new HashSet<GroupStudent>();
+      // this.GroupStudentJoinEntities = new HashSet<GroupStudent>();
     }
   }
 }
+
+
