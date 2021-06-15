@@ -10,10 +10,10 @@ namespace StudentRandomizer.Controllers
   [ApiController]
   [Route("[controller]")]
 
-  public class StudentController : ControllerBase
+  public class StudentsController : ControllerBase
   {
     private readonly StudentRandomizerContext _db;
-    public StudentController(StudentRandomizerContext db)
+    public StudentsController(StudentRandomizerContext db)
     {
       _db = db;
     }
@@ -34,22 +34,16 @@ namespace StudentRandomizer.Controllers
 
     //Get
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Student>>> Get(int studentId)
+    public async Task<ActionResult<IEnumerable<Student>>> Get()
     {
-      var query = _db.Students.AsQueryable();
-
-      if (studentId != null)
-      {
-        query = query.Where(s => s.StudentId == studentId);
-      }
-      return await query.ToListAsync();
+      return await _db.Students.ToListAsync();
     }
 
     // GET with id
     [HttpGet("{id}")]
     public async Task<ActionResult<Student>> GetStudent(int id)
     {
-      var student = _db.Students.FirstOrDefault(s => s.StudentId == id);
+      var student = await _db.Students.FindAsync(id);
 
       if (student == null)
       {
