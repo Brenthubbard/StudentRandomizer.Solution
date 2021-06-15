@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace StudentRandomizer.Controllers
 {
-[ApiController]
+  [ApiController]
   [Route("[controller]")]
 
   public class StudentController : ControllerBase

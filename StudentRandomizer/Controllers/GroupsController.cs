@@ -8,7 +8,7 @@ using System.Linq;
 namespace StudentRandomizer.Controllers
 {
   [ApiController]
-  [Route("[controller")]
+  [Route("[controller]")]
   public class GroupsController : ControllerBase
   {
     private readonly StudentRandomizerContext _db;
