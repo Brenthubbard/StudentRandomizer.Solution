@@ -110,5 +110,14 @@ namespace StudentRandomizer.Controllers
 
       return NoContent();
     }
+
+    // CREATE MatchStudent
+    [HttpPost]
+    public async Task<ActionResult<MatchStudent>> CreateMatchStudent(MatchStudent matchStudent)
+    {
+      _db.MatchStudent.Add(matchStudent);
+      await _db.SaveChangesAsync();
+      return CreatedAtAction("Post", new { id = matchStudent.MatchStudentId }, matchStudent);
+    }
   }
 }
