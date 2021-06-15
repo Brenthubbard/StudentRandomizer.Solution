@@ -30,24 +30,19 @@ namespace StudentRandomizer.Controllers
       await _db.SaveChangesAsync();
       return CreatedAtAction("Post", new { id = group.GroupId }, group);
     }
+
     //Get 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Group>>> Get(int groupId)
+    public async Task<ActionResult<IEnumerable<Group>>> Get()
     {
-      var query = _db.Groups.AsQueryable();
-
-      if (groupId != null)
-        {
-          query = query.Where(m => m.GroupId == groupId);
-        }
-      return await query.ToListAsync();
+      return await _db.Groups.ToListAsync();
     }
 
     // GET with id
     [HttpGet("{id}")]
     public async Task<ActionResult<Group>> GetGroup(int id)
     {
-      var group = await _db.Groups.FirstOrDefaultAsync(m => m.GroupId == id);
+      var group = await _db.Groups.FirstOrDefaultAsync(g => g.GroupId == id);
 
       if (group == null)
       {
@@ -129,7 +124,7 @@ namespace StudentRandomizer.Controllers
     }
 
     // Get api/Groups/GetStudents/{id}
-    [HttpGet("GetStudents/{id}")]
+    [HttpGet("GetStudent/{id}")]
     public async Task<ActionResult<IEnumerable<GroupStudent>>> GetStudents(int id)
     {
       List<GroupStudent> joinEntries = await _db.GroupStudent.Where(entry => entry.StudentId == id).ToListAsync();
