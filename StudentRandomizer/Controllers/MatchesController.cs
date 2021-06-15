@@ -37,12 +37,12 @@ namespace StudentRandomizer.Controllers
     {
       var query = _db.Matches.AsQueryable();
 
-      if (matchId != null)
+      if (matchId > 0)
       {
         query = query.Where(m => m.MatchId == matchId);
       }
 
-      if (matchScore != null)
+      if (matchScore > 0)
       {
         query = query.Where(m => m.MatchScore == matchScore);
       }
@@ -112,8 +112,8 @@ namespace StudentRandomizer.Controllers
     }
 
     // /api/matches/AddStudent/{id}
-    [HttpPost("/AddStudent/{id}")]
-    public async Task<ActionResult<MatchStudent>> AddStudent(int id, Student student)
+    [HttpPost("AddStudent/{id}")]
+    public async Task<IActionResult> AddStudent(int id, Student student)
     {
       Match thisMatch = await _db.Matches.FindAsync(id);
       Student thisStudent = await _db.Students.FindAsync(student.StudentId);
@@ -137,17 +137,11 @@ namespace StudentRandomizer.Controllers
 
     // GET route that queries by studentId
     // GET api/matches/GetStudents/{id}
-    [HttpGet("GetStudents/{id}")]
-    public async Task<ActionResult<IEnumerable<MatchStudent>>> GetStudents(int matchId, int studentId)
+    [HttpGet("GetStudent/{id}")]
+    public async Task<ActionResult<IEnumerable<MatchStudent>>> GetStudents(int id)
     {
-      var query = _db.MatchStudent.AsQueryable();
-
-      if (studentId != null)
-      {
-        query = query.Where(ms => ms.StudentId == studentId);
-      }
-
-      return await query.ToListAsync();
+      List<MatchStudent> joinEntries = await _db.MatchStudent.Where(entry => entry.StudentId == id).ToListAsync();
+      return joinEntries;
     }
   }
 }
