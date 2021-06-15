@@ -9,7 +9,6 @@ namespace StudentRandomizer.Controllers
 {
   [ApiController]
   [Route("api/[controller]")]
-
   public class StudentsController : ControllerBase
   {
     private readonly StudentRandomizerContext _db;
