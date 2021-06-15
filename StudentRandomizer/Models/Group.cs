@@ -6,7 +6,7 @@ namespace StudentRandomizer.Models
   {
     // public string Name { get; set; }
 
-    // public int GroupSize { get; set; }
+  // public int GroupSize { get; set; }
 
     public int GroupId { get; set; }
 
@@ -20,5 +20,3 @@ namespace StudentRandomizer.Models
     }
   }
 }
-
-
