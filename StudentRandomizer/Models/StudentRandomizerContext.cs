@@ -12,8 +12,11 @@ namespace StudentRandomizer.Models
 
     // public DbSet<Group> Groups { get; set;}
     // public DbSet<Match> Matches { get; set;}
-    public StudentRandomizerContext(DbContextOptions<StudentRandomizerContext> options) : base(options)
+    public StudentRandomizerContext(DbContextOptions<StudentRandomizerContext> options) : base(options) { }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
+      optionsBuilder.UseLazyLoadingProxies();
     }
   }
 }
