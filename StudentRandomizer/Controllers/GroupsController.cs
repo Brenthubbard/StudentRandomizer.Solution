@@ -104,15 +104,5 @@ namespace StudentRandomizer.Controllers
       return NoContent();
     }
 
-    //Create GroupStudent
-    [HttpPost]
-    public async Task<ActionResult<GroupStudent>> CreateGroupStudent(GroupStudent groupStudent)
-    {
-      _db.GroupStudent.Add(groupStudent);
-      await _db.SaveChangesAsync();
-      return CreatedAtAction("Post", new { id = groupStudent.GroupStudentId },
-      groupStudent);
-    }
-
   }
 }
