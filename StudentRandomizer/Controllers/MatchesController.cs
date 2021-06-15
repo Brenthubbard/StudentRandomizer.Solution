@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace StudentRandomizer.Controllers
 {
   [ApiController]
-  [Route("[controller]")]
+  [Route("api/[controller]")]
   public class MatchesController : ControllerBase
   {
     private readonly StudentRandomizerContext _db;
