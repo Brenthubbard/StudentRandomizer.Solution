@@ -103,6 +103,37 @@ namespace StudentRandomizer.Controllers
 
       return NoContent();
     }
+    
+    //Post api/Groups/AddStudent/{id}
+    [HttpPost("AddStudent/{id}")]
+    public async Task<IActionResult> AddStudent(int id, Student student)
+    {
+      Group selectedGroup = await _db.Groups.FindAsync(id);
+      Student selectedStudent = await _db.Students.FindAsync(student.StudentId);
+      if (selectedGroup == null || selectedStudent == null)
+      {
+        return BadRequest();
+      }
 
+      _db.GroupStudent.Add(new GroupStudent()
+      {
+        GroupId = selectedGroup.GroupId,
+        StudentId = selectedStudent.StudentId,
+        // Group = selectedGroup,
+        // Student = selectedStudent
+      });
+
+      await _db.SaveChangesAsync();
+
+      return NoContent();
+    }
+
+    // Get api/Groups/GetStudents/{id}
+    [HttpGet("GetStudents/{id}")]
+    public async Task<ActionResult<IEnumerable<GroupStudent>>> GetStudents(int id)
+    {
+      List<GroupStudent> joinEntries = await _db.GroupStudent.Where(entry => entry.StudentId == id).ToListAsync();
+      return joinEntries;
+    }
   }
 }

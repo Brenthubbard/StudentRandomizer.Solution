@@ -110,5 +110,44 @@ namespace StudentRandomizer.Controllers
 
       return NoContent();
     }
+
+    // /api/matches/AddStudent/{id}
+    [HttpPost("/AddStudent/{id}")]
+    public async Task<ActionResult<MatchStudent>> AddStudent(int id, Student student)
+    {
+      Match thisMatch = await _db.Matches.FindAsync(id);
+      Student thisStudent = await _db.Students.FindAsync(student.StudentId);
+
+      if (thisMatch == null || thisStudent == null)
+      {
+        return NotFound();
+      }
+
+      _db.MatchStudent.Add( new MatchStudent()
+      {
+        MatchId = thisMatch.MatchId,
+        StudentId = thisStudent.StudentId,
+        // Match = thismatch,
+        // Student = thisStudent
+      });
+
+      await _db.SaveChangesAsync();
+      return NoContent();
+    }
+
+    // GET route that queries by studentId
+    // GET api/matches/GetStudents/{id}
+    [HttpGet("GetStudents/{id}")]
+    public async Task<ActionResult<IEnumerable<MatchStudent>>> GetStudents(int matchId, int studentId)
+    {
+      var query = _db.MatchStudent.AsQueryable();
+
+      if (studentId != null)
+      {
+        query = query.Where(ms => ms.StudentId == studentId);
+      }
+
+      return await query.ToListAsync();
+    }
   }
 }
