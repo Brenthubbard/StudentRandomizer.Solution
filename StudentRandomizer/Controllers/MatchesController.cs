@@ -1,9 +1,9 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using StudentRandomizer.Models;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace StudentRandomizer.Controllers
 {
@@ -12,7 +12,7 @@ namespace StudentRandomizer.Controllers
   public class MatchesController : ControllerBase
   {
     private readonly StudentRandomizerContext _db;
-    public MatchsController(StudentRandomizerContext db)
+    public MatchesController(StudentRandomizerContext db)
     {
       _db = db;
     }
@@ -79,7 +79,7 @@ namespace StudentRandomizer.Controllers
       {
         await _db.SaveChangesAsync();
       }
-      catch (DbUpdateConcurrencyExpection)
+      catch (DbUpdateConcurrencyException)
       {
         if (!MatchExists(id))
         {
@@ -98,7 +98,7 @@ namespace StudentRandomizer.Controllers
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteMatch(int id)
     {
-      var match = await _db.Matches.FindAsync(m => m.MatchId == id);
+      var match = await _db.Matches.FindAsync(id);
 
       if (match == null)
       {
