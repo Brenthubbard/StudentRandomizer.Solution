@@ -135,12 +135,36 @@ namespace StudentRandomizer.Controllers
       return NoContent();
     }
 
+     // /api/matches/AddStudent/{id}
+    [HttpDelete("{id}/Student")]
+    public async Task<IActionResult> DeleteStudent(int id, int studentId)
+    {
+      MatchStudent joinEntry = await _db.MatchStudent.FirstOrDefaultAsync(m => m.MatchId == id && m.StudentId == studentId);
+
+      if (thisMatch == null || thisStudent == null)
+      {
+        return NotFound();
+      }
+
+      await _db.SaveChangesAsync();
+      return NoContent();
+    }
+
     // GET route that queries by studentId
     // GET api/matches/GetStudents/{id}
     [HttpGet("GetStudent/{id}")]
     public async Task<ActionResult<IEnumerable<MatchStudent>>> GetStudents(int id)
     {
       List<MatchStudent> joinEntries = await _db.MatchStudent.Where(entry => entry.StudentId == id).ToListAsync();
+      return joinEntries;
+    }
+
+    // GET route that queries by matchId
+    // GET api/matches/GetStudents/{id}
+    [HttpGet("Students/{id}")]
+    public async Task<ActionResult<IEnumerable<MatchStudent>>> GetMatchStudents(int id)
+    {
+      List<MatchStudent> joinEntries = await _db.MatchStudent.Where(entry => entry.MatchId == id).ToListAsync();
       return joinEntries;
     }
   }
