@@ -123,7 +123,7 @@ namespace StudentRandomizer.Controllers
         return NotFound();
       }
 
-      _db.MatchStudent.Add( new MatchStudent()
+      _db.MatchStudent.Add(new MatchStudent()
       {
         MatchId = thisMatch.MatchId,
         StudentId = thisStudent.StudentId,
@@ -135,17 +135,18 @@ namespace StudentRandomizer.Controllers
       return NoContent();
     }
 
-     // /api/matches/AddStudent/{id}
-    [HttpDelete("{id}/Student")]
+    // DELETE /api/matches/Student/{id}
+    [HttpDelete("{id}/Student/{studentId}")]
     public async Task<IActionResult> DeleteStudent(int id, int studentId)
     {
       MatchStudent joinEntry = await _db.MatchStudent.FirstOrDefaultAsync(m => m.MatchId == id && m.StudentId == studentId);
 
-      if (thisMatch == null || thisStudent == null)
+      if (joinEntry == null)
       {
         return NotFound();
       }
 
+      _db.MatchStudent.Remove(joinEntry);
       await _db.SaveChangesAsync();
       return NoContent();
     }
@@ -156,15 +157,6 @@ namespace StudentRandomizer.Controllers
     public async Task<ActionResult<IEnumerable<MatchStudent>>> GetStudents(int id)
     {
       List<MatchStudent> joinEntries = await _db.MatchStudent.Where(entry => entry.StudentId == id).ToListAsync();
-      return joinEntries;
-    }
-
-    // GET route that queries by matchId
-    // GET api/matches/GetStudents/{id}
-    [HttpGet("Students/{id}")]
-    public async Task<ActionResult<IEnumerable<MatchStudent>>> GetMatchStudents(int id)
-    {
-      List<MatchStudent> joinEntries = await _db.MatchStudent.Where(entry => entry.MatchId == id).ToListAsync();
       return joinEntries;
     }
   }
