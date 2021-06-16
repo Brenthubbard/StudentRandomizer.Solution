@@ -51,7 +51,7 @@ namespace StudentRandomizer.Controllers
 
       return group;
     }
-    
+
     //PUT with id
     [HttpPut("{id}")]
     public async Task<IActionResult> Put(int id, Group group)
@@ -98,7 +98,7 @@ namespace StudentRandomizer.Controllers
 
       return NoContent();
     }
-    
+
     //Post api/Groups/AddStudent/{id}
     [HttpPost("AddStudent/{id}")]
     public async Task<IActionResult> AddStudent(int id, Student student)
@@ -120,6 +120,22 @@ namespace StudentRandomizer.Controllers
 
       await _db.SaveChangesAsync();
 
+      return NoContent();
+    }
+
+    // DELETE /api/Groups/Student/{id}
+    [HttpDelete("{id}/Student/{studentId}")]
+    public async Task<IActionResult> DeleteStudent(int id, int studentId)
+    {
+      GroupStudent joinEntry = await _db.GroupStudent.FirstOrDefaultAsync(m => m.GroupId == id && m.StudentId == studentId);
+
+      if (joinEntry == null)
+      {
+        return NotFound();
+      }
+
+      _db.GroupStudent.Remove(joinEntry);
+      await _db.SaveChangesAsync();
       return NoContent();
     }
 
