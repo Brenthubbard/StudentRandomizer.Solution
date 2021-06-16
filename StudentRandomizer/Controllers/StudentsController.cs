@@ -99,5 +99,22 @@ namespace StudentRandomizer.Controllers
       return NoContent();
     }
 
+    // GET route that queries by groupId
+    // GET api/Students/Group/{groupId}
+    [HttpGet("Group/{groupId}")]
+    public async Task<ActionResult<IEnumerable<GroupStudent>>> GetGroupStudents(int groupId)
+    {
+      List<GroupStudent> joinEntries = await _db.GroupStudent.Where(entry => entry.GroupId == groupId).ToListAsync();
+      return joinEntries;
+    }
+
+    // GET route that queries by matchId
+    // GET api/Students/Match/{matchId}
+    [HttpGet("Match/{matchId}")]
+    public async Task<ActionResult<IEnumerable<MatchStudent>>> GetMatchStudents(int matchId)
+    {
+      List<MatchStudent> joinEntries = await _db.MatchStudent.Where(entry => entry.MatchId == matchId).ToListAsync();
+      return joinEntries;
+    }
   }
 }
