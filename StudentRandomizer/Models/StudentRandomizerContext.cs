@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 
 // edited to reflect a possible solution --JS
 
@@ -18,6 +19,9 @@ namespace StudentRandomizer.Models
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
+      List<Match> matchSeedData = GenerateMatches(351);
+      List<MatchStudent> matchStudentSeedData = GenerateMatchStudentEntries(27);
+
       builder.Entity<Student>()
             .HasData(
               new Student { StudentId = 1, Name = "Ahmed Ghouzlane" },
@@ -49,13 +53,7 @@ namespace StudentRandomizer.Models
               new Student { StudentId = 27, Name = "Vanessa Su" }
             );
       builder.Entity<Match>()
-            .HasData(
-              new Match { MatchId = 1 },
-              new Match { MatchId = 2 },
-              new Match { MatchId = 3 },
-              new Match { MatchId = 4 },
-              new Match { MatchId = 5 }
-            );
+            .HasData(matchSeedData);
       builder.Entity<Group>()
             .HasData(
               new Group { GroupId = 1 },
@@ -64,6 +62,41 @@ namespace StudentRandomizer.Models
               new Group { GroupId = 4 },
               new Group { GroupId = 5 }
             );
+      builder.Entity<MatchStudent>()
+            .HasData(matchStudentSeedData);
+    }
+
+    private static List<Match> GenerateMatches(int numberOfMatches)
+    {
+      List<Match> allMatches = new List<Match>();
+      for (int i = 1; i <= numberOfMatches; i++)
+      {
+        Match newMatch = new Match { MatchId = i, MatchScore = 0 };
+        allMatches.Add(newMatch);
+      }
+      return allMatches;
+    }
+
+    private static List<MatchStudent> GenerateMatchStudentEntries(int numberOfStudents)
+    {
+      List<MatchStudent> generatedMatchStudentList = new List<MatchStudent>();
+      int currentMatchId = 1;
+      int currentMatchStudentId = 1;
+      for (int i = 1; i <= numberOfStudents; i++)
+      {
+        for (int j = i + 1; j <= numberOfStudents; j++)
+        {
+          MatchStudent firstEntry = new MatchStudent { MatchStudentId = currentMatchStudentId, MatchId = currentMatchId, StudentId = i };
+          currentMatchStudentId++;
+          MatchStudent secondEntry = new MatchStudent { MatchStudentId = currentMatchStudentId, MatchId = currentMatchId, StudentId = j };
+          currentMatchStudentId++;
+
+          generatedMatchStudentList.Add(firstEntry);
+          generatedMatchStudentList.Add(secondEntry);
+          currentMatchId++;
+        }
+      }
+      return generatedMatchStudentList;
     }
 
     // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
