@@ -28,7 +28,7 @@ namespace StudentRandomizer.Controllers
     {
       _db.Groups.Add(group);
       await _db.SaveChangesAsync();
-      return CreatedAtAction("Post", new { id = group.GroupId }, group);
+      return CreatedAtAction(nameof(GetGroup), new { id = group.GroupId }, group);
     }
 
     //Get 

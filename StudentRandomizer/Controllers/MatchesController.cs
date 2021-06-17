@@ -28,7 +28,7 @@ namespace StudentRandomizer.Controllers
     {
       _db.Matches.Add(match);
       await _db.SaveChangesAsync();
-      return CreatedAtAction("Post", new { id = match.MatchId }, match);
+      return CreatedAtAction(nameof(GetMatch), new { id = match.MatchId }, match);
     }
 
     // GET
