@@ -6,9 +6,10 @@ namespace StudentRandomizer.Models
   {
     // public string Name { get; set; }
 
-  // public int GroupSize { get; set; }
+    // public int GroupSize { get; set; }
 
     public int GroupId { get; set; }
+    public int GroupScore { get; set; }
 
     // public List<Student> Students { get; set; }
 
