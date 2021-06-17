@@ -28,7 +28,7 @@ namespace StudentRandomizer.Controllers
     {
       _db.Students.Add(student);
       await _db.SaveChangesAsync();
-      return CreatedAtAction("Post", new { id = student.StudentId }, student);
+      return CreatedAtAction(nameof(GetStudent), new { id = student.StudentId }, student);
     }
 
     //Get
