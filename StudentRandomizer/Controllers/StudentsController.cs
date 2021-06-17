@@ -99,6 +99,20 @@ namespace StudentRandomizer.Controllers
       return NoContent();
     }
 
+    // DELETE all students
+    public async Task<IActionResult> DeleteAllStudents()
+    {
+      var allStudents = await _db.Students.ToListAsync();
+      foreach (Student student in allStudents)
+      {
+        _db.Students.Remove(student);
+      }
+
+      await _db.SaveChangesAsync();
+
+      return NoContent();
+    }
+
     // GET route that queries by groupId
     // GET api/Students/Group/{groupId}
     [HttpGet("Group/{groupId}")]
