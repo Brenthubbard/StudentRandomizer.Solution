@@ -20,15 +20,16 @@
 <br />
 
 ## **About the Student Randomizer API**
+
 <br />
 
 Note: This API is designed to be used with the MVC application [Student Randomizer](https://github.com/vnessa-su/StudentRandomizerMvc.Solution.git). This project was created during the C#/.NET Team Week (Week XIV) at Epicodus, a web development bootcamp in Portland, Oregon.
 
 During our March 2021 cohort, we discovered that the randomization tools our instructors used to build dev teams out of our cohort of 30+ students produced repetitive groups. We believe our experience suffered as a result, which inspired us to create a better option for our instructors to use. With this API and the cooresponding MVC application, instructors can generate a set of API calls for students, groups, matches, and join entries to build better randomized dev teams of students.
 <br />
-<br />
 
 ## **Technologies Used**
+
 <br />
 
 * C#
@@ -39,6 +40,7 @@ During our March 2021 cohort, we discovered that the randomization tools our ins
 <br />
 
 ## **Set Up and Launch the API**
+
 <br />
 
 1. Navigate to desired destination directory using `cd <directory name>` inside of the terminal
@@ -47,14 +49,14 @@ During our March 2021 cohort, we discovered that the randomization tools our ins
 4. Nagivate to project folder using `cd StudentRandomizer`
 5. `dotnet restore` to install dependencies.
 6. `dotnet run` to run application on server `http://localhost:4000/`
-<br />
+
 <br />
 
 ## **Using the API**
 <br />
 
 To test this API, [Postman](https://www.postman.com/downloads) is a highly recommended client that allows access to these endpoints with GET, POST, PUT, and DELETE requests alongside a host of others. To test, follow these steps in this example:
-<br />
+
 <br />
 
   1. Download and install [Postman](https://www.postman.com/downloads)
@@ -64,19 +66,22 @@ To test this API, [Postman](https://www.postman.com/downloads) is a highly recom
   4. Select the type of request you would like to make.
     * GET and DELETE requests need only call the API endpoint
     * For POST and PUT requests, navigate to the `Body` tab, select `Raw`, select `Json` in the adjacent dropdown menu, and apply the JSON template listed below to fulfill a request
-<br />
+
 <br />
 
 ## **Endpoints**
+
 <br />
 
 ### **Students**
+
 <br />
 
   * **/api/students**
     1. GET: Returns a list of all students (no JSON body)
     2. POST: Creates and returns a new student with an auto-incremented id
-    3. DELETE: Deletes all students (no JSON body; **to reseed database, you must drop the schema and run again `dotnet ef database update`) <br />
+    3. DELETE: Deletes all students (no JSON body; **to reseed database, you must drop the schema and run again `dotnet ef database update`)
+
     <br />
     
     ```
@@ -84,28 +89,33 @@ To test this API, [Postman](https://www.postman.com/downloads) is a highly recom
       "name": "[NEW STUDENT NAME]"
     }
     ```
+
     <br />
 
   * **/api/students/{id}**
     1. GET: Returns a specific student (no JSON body)
     2. PUT: Updates a specific student
-    3. DELETE: Deletes a specific student (no JSON body) <br />
+    3. DELETE: Deletes a specific student (no JSON body)
+    
     <br />
+
     ```
     {
       "studentId": "[STUDENTID]",
       "name": "[NEW STUDENT NAME]"
     }
     ```
+
     <br />
 
   * **/api/Group/{groupId}**
-    1. GET: Returns all students associated with a given groupId (no JSON body) <br />
+    1. GET: Returns all students associated with a given groupId (no JSON body)
+    
     <br />
 
   * **/api/Match/{matchId}**
     1. GET: Returns all students associated with a given matchId (no JSON body)
-    <br />
+    
 <br />
 
 ### **Groups**
@@ -114,19 +124,22 @@ To test this API, [Postman](https://www.postman.com/downloads) is a highly recom
 
   * **/api/groups**
     1. GET: Returns a list of all groups
-    2. POST: Creates and returns a new group with an auto-incremented id <br />
+    2. POST: Creates and returns a new group with an auto-incremented id
+    
     <br />
     ```
     {
       [SEND AN EMPTY JSON BODY]
     }
     ```
+
     <br />
   
   * **/api/groups/{id}**
     1. GET: Returns a specific group (no JSON body)
     2. PUT: Updates a specific group
-    3. DELETE: Deletes a specific group (no JSON body) <br />
+    3. DELETE: Deletes a specific group (no JSON body)
+    
     <br />
 
     ```
@@ -134,10 +147,12 @@ To test this API, [Postman](https://www.postman.com/downloads) is a highly recom
       "groupId": "[GROUPID]"
     }
     ```
+
     <br />
   
   * **/api/groups/AddStudent/{id}**
-    1. POST: Adds a join entry that associates a student with a given groupId (id) <br />
+    1. POST: Adds a join entry that associates a student with a given groupId (id)
+    
     <br />
 
     ```
@@ -147,23 +162,27 @@ To test this API, [Postman](https://www.postman.com/downloads) is a highly recom
       "name": "[STUDENT NAME]"
     }
     ```
+
     <br />
 
   * **/api/groups/{groupId}/Student/{studentId}**
-    1. DELETE: Deletes a join entry removing the association between a given student (no JSON body) <br />
+    1. DELETE: Deletes a join entry removing the association between a given student (no JSON body)
+    
     <br />
 
   * **/api/groups/GetStudent/{id}**
     1. GET: Returns all groups with a given studentId (no JSON body)
-<br />
+
 <br />
 
 ### **Matches**
+
 <br />
 
   * **/api/matches**
     1. GET: Returns all matches (no JSON body)
-    2. POST: Creates and returns a new match <br />
+    2. POST: Creates and returns a new match
+    
     <br />
 
     ```
@@ -177,7 +196,8 @@ To test this API, [Postman](https://www.postman.com/downloads) is a highly recom
   * **/api/matches/{id}**
     1. GET: Returns a specific match (no JSON body)
     2. PUT: Updates a specific match
-    3. DELETE: Deletes a specific match (no JSON body) <br />
+    3. DELETE: Deletes a specific match (no JSON body)
+    
     <br />
 
     ```
@@ -198,6 +218,7 @@ To test this API, [Postman](https://www.postman.com/downloads) is a highly recom
       "studentId": 28
     }
     ```
+
   <br />
 
   * **/api/matches/{matchId}/Student/{studentId}**
@@ -206,10 +227,12 @@ To test this API, [Postman](https://www.postman.com/downloads) is a highly recom
 <br />
 
   * **/api/matches/GetStudent/{id}**
-    1. GET: Returns a list of all matches by the given studentId (no JSON body) <br />
+    1. GET: Returns a list of all matches by the given studentId (no JSON body)
+    
 <br />
 
 ## **Using Swagger**
+
 <br />
 
 - To use swagger navigate to the http://localhost:5000/swagger page.
@@ -231,10 +254,11 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM.cs, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-<br />
+
 <br />
 
 ## **Acknowledgements**
+
 <br />
 
 This project was developed alongside the [LearnHowToProgram curriculum](learnhowtoprogram.com) at Epicodus, a coding bootcamp in Portland, Oregon. This project would not have been possible without the collaboration of [Vanessa Su](https://github.com/vnessa-su), [Min Chang](https://github.com/M-H-Chang), [Brent Hubbard](https://github.com/Brenthubbard), and [Jonathan Stull](https://github.com/jonathanstull).
@@ -243,7 +267,11 @@ In particular, the developers would like to acknowledge Vanessa Su's algorithmic
 
 This app would not have been possible without the tutelage of Epicodus instructors [Erik Irgens](https://github.com/erik-t-irgens) and [James Henager](https://github.com/jhenager).
 
+<br />
+
 ## **Contact Information**
+
+<br />
 
 - Min Chang: minchangmhc at gmail dot com
 - Vanessa Su: vnessa.su at gmail dot com
