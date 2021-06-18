@@ -6,6 +6,7 @@
 
 * <a href="#about-the-student-randomizer-API">About the Student Randomizer API</a>
     * <a href="#technologies-used">Technologies Used</a>
+    * <a href="#known-bugs">Known Bugs</a>
 * <a href="#Set-Up-and-Launch-the-API">Set Up and Launch the API</a>
 * <a href="#Using-the-API">Using the API</a>
 * <a href="#Endpoints">Endpoints</a>
@@ -36,6 +37,16 @@ During our March 2021 cohort, we discovered that the randomization tools our ins
 * .NET 5 Framework
 * Entity Framework Core
 * RestSharp
+
+<br />
+
+## **Known Bugs**
+
+<br />
+
+- Currently there are optimizations for the database that needs to get done. In order for the user to use this application they would have to seed their own data using migrations to properly function the application. Work in progress is to get a more intuitive database that can update based on API calls.
+- Not all Views complete for CRUD functionality
+- Group score is not optimized when extra students are added to the groups
 
 <br />
 
