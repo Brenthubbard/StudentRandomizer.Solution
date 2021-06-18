@@ -1,5 +1,7 @@
 # Student Randomizer API
 
+#### By Brent Hubbard, Jonathan Stull, Min Change, Vanessa Su
+
 ## **Table of Contents**
 
 <br />
